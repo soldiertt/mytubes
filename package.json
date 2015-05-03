@@ -1,0 +1,34 @@
+{
+  "name": "mytubes",
+  "version": "1.0.0",
+  "description": "Store and manage your personal youtube video collection.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/soldiertt/mytubes.git"
+  },
+  "author": "soldiertt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soldiertt/mytubes/issues"
+  },
+  "homepage": "https://github.com/soldiertt/mytubes",
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "compression": "^1.4.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^0.8.1",
+    "ejs": "^2.3.1",
+    "express": "^4.12.3",
+    "express-session": "^1.11.1",
+    "http": "0.0.0",
+    "method-override": "^2.3.2",
+    "mongoose": "^4.0.2",
+    "morgan": "^1.5.2",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0"
+  }
+}

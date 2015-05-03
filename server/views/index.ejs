@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:ng="http://angularjs.org">
+<head>
+    <title>
+        <%=title %>
+    </title>
+</head>
+
+<body>
+
+    <section ng-view></section>
+    
+    <script type="text/javascript">
+        window.user = <%- user || 'null' %>;
+    </script>
+
+    <script type="text/javascript" src="/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+   
+    <script type="text/javascript" src="/core/core.client.module.js"></script>
+    <script type="text/javascript" src="/core/ctrl/core.client.ctrl.js"></script>
+    <script type="text/javascript" src="/core/config/core.client.routes.js"></script>
+    
+    <script type="text/javascript" src="/user/user.client.module.js"></script>
+    <script type="text/javascript" src="/user/service/authentication.client.service.js"></script>
+
+    <script type="text/javascript" src="/application.js"></script>
+</body>
+
+</html>
