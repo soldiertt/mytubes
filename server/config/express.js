@@ -45,6 +45,7 @@ module.exports = function (db) {
 
     require('../routes/index.srv.routes.js')(app);
     require('../routes/user.srv.routes.js')(app);
+    require('../routes/video.srv.routes.js')(app);
 
     app.use(express.static('./client'));
     
