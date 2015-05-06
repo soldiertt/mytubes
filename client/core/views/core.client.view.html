@@ -7,17 +7,6 @@
     <div data-ng-show="authentication.user">
         <h1>Hello <span data-ng-bind="authentication.user.fullName"></span></h1>
         <a href="/signout">Signout</a>
-
-        <section ng-controller="VideoController">
-            <form ng-submit="save()">
-                <label for="video">Video :</label>
-                <input type="text" name="video" id="video" ng-model="newvideo.ref" />
-                <label for="tags">Tags :</label>
-                <input type="text" name="tags" id="tags" ng-model="newvideo.tags" />
-                <div>
-                    <input type="submit">
-                </div>
-            </form>
-        </section>
+        <div ng-include src="'../../video/views/video.client.view.html'"></div>
     </div>
 </section>

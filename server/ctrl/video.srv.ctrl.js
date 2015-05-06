@@ -1,16 +1,28 @@
 var Video = require('mongoose').model('Video');
 
 var getErrorMessage = function (err) {
-    var errName;
-    if (err.errors) {
+    var message = '',
+        errName;
+
+    if (err.code) {
+        switch (err.code) {
+            case 11000:
+            case 11001:
+                message = 'Video already exists';
+                break;
+            default:
+                message = 'Something went wrong';
+        }
+    } else if (err.errors) {
         for (errName in err.errors) {
             if (err.errors[errName].message) {
-                return err.errors[errName].message;
+                message = err.errors[errName].message;
             }
         }
     } else {
-        return 'Unknown server error';
+        message = 'Unknown server error';
     }
+    return message;
 };
 
 exports.create = function (req, res) {
