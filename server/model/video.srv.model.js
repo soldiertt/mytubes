@@ -1,8 +1,5 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    notEmpty = function(tags){
-        return (tags.length !== 0);
-    },
     preSave = function(next) {
         var tags = this.tags;
         // Remove empty strings
@@ -28,7 +25,9 @@ var VideoSchema = new Schema({
     },
     tags: {
         type: [String],
-        validate: [notEmpty, 'Please add at least one tag.']
+        validate: [function(tags){
+            return (tags.length !== 0);
+        }, 'Please add at least one tag.']
     }
 });
 

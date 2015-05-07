@@ -25,6 +25,5 @@ angular.module('video').controller('VideoController', ['$scope', '$location',  '
             });
         };
 
-
     }
 ]);

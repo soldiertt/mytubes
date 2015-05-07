@@ -40,7 +40,7 @@ exports.create = function (req, res) {
 };
 
 exports.list = function (req, res) {
-    Video.find().populate('user', 'firstName lastName fullName ').exec(function (err, videos) {
+    Video.find({user: req.user._id}).populate('user', 'firstName lastName fullName ').exec(function (err, videos) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
@@ -49,6 +49,20 @@ exports.list = function (req, res) {
             res.json(videos);
         }
     });
+};
+
+exports.listUniqTags = function (req, res) {
+    Video.aggregate([
+            { "$match": { "user": req.user._id }},
+            { "$project": { "tags":1 }},
+            { "$unwind": "$tags" },
+            { "$group": { "_id": "$tags", "count": { "$sum": 1 } }}
+        ],
+        function(err,result) {
+            // Result is an array of documents
+            res.json(result);
+        }
+    );
 };
 
 exports.videoByID = function (req, res, next, id) {
