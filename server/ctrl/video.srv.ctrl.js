@@ -40,7 +40,11 @@ exports.create = function (req, res) {
 };
 
 exports.list = function (req, res) {
-    Video.find({user: req.user._id}).populate('user', 'firstName lastName fullName ').exec(function (err, videos) {
+    var queryObj = {user: req.user._id};
+    if (req.query.tags) {
+        queryObj.tags = {$all : req.query.tags};
+    }
+    Video.find(queryObj).populate('user', 'firstName lastName fullName ').exec(function (err, videos) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
@@ -56,7 +60,8 @@ exports.listUniqTags = function (req, res) {
             { "$match": { "user": req.user._id }},
             { "$project": { "tags":1 }},
             { "$unwind": "$tags" },
-            { "$group": { "_id": "$tags", "count": { "$sum": 1 } }}
+            { "$group": { "_id": "$tags", "count": { "$sum": 1 } }},
+            { "$sort": { "count" : -1 } }
         ],
         function(err,result) {
             // Result is an array of documents

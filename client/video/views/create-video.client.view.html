@@ -1,14 +1,12 @@
-<section ng-controller="VideoController">
-    <form ng-submit="save()">
-        <label for="video">Video :</label>
-        <input type="text" name="video" id="video" ng-model="newvideo.ref" />
-        <label for="tags">Tags :</label>
-        <input type="text" name="tags" id="tags" ng-model="newvideo.tags" />
-        <div>
-            <input type="submit">
-        </div>
-        <div data-ng-show="error">
-            <strong data-ng-bind="error"></strong>
-        </div>
-    </form>
-</section>
+<form ng-submit="save()">
+    <label for="video">Video :</label>
+    <input type="text" name="video" id="video" ng-model="newvideo.ref" />
+    <label for="tags">Tags :</label>
+    <input type="text" name="tags" id="tags" ng-model="newvideo.tags" />
+    <div>
+        <input type="submit">
+    </div>
+    <div data-ng-show="error">
+        <strong data-ng-bind="error"></strong>
+    </div>
+</form>

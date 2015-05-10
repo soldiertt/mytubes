@@ -1,0 +1,10 @@
+<section ng-controller="NavigationController">
+    <ul>
+       <li ng-repeat="tag in navtags" ng-click="addTag(tag._id)">{{tag._id}} - {{tag.count}}</li>
+    </ul>
+
+    <ul>
+        <li ng-repeat="selTag in selectedTags" ng-click="removeTag(selTag)">{{selTag}}</li>
+    </ul>
+
+</section>

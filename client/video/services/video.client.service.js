@@ -4,9 +4,7 @@ angular.module('video').factory('VideoResource', ['$resource',
             videoId: '@_id'
         },
         {
-            update: {
-                method: 'PUT'
-            }
+            update: { method: 'PUT' }
         });
     }
 ]);
