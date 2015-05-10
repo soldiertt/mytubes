@@ -1,11 +1,34 @@
 angular.module('video').controller('NavigationController', ['$scope', '$location', 'NavigationResource',
     function ($scope, $location, NavigationResource) {
 
-        $scope.selectedTags = [];
+        $scope.selectedTagNames = [];
+        $scope.availableTags = [];
 
-        var loadNav = function() {
-            $scope.navtags = NavigationResource.query();
-        };
+        var availables = function() {
+                $scope.availableTags = NavigationResource.query({"tags":$scope.selectedTagNames}, function(availableTags) {
+                    $scope.navtags.forEach(function(navtag, i, navtags) {
+                        var j,
+                            available = false;
+                        for (j = 0; j < availableTags.length; j++) {
+                            if (navtag._id === availableTags[j]._id) {
+                                available = true;
+                                break;
+                            }
+                        }
+                        navtags[i].disabled = !available;
+                        if (available) {
+                            navtags[i].count = availableTags[j].count;
+                        } else {
+                            navtags[i].count = undefined;
+                        }
+                    });
+                });
+
+            },
+            loadNav = function() {
+                $scope.navtags = NavigationResource.query();
+                availables();
+            };
 
         loadNav();
 
@@ -13,14 +36,18 @@ angular.module('video').controller('NavigationController', ['$scope', '$location
             loadNav();
         });
 
-        $scope.addTag = function(tagName) {
-            $scope.selectedTags.push(tagName);
-            $scope.listVideo($scope.selectedTags);
+        $scope.toggleTag = function(tagName) {
+            if ($scope.selectedTagNames.indexOf(tagName) !== -1) {
+                $scope.selectedTagNames.splice($scope.selectedTagNames.indexOf(tagName), 1);
+            } else {
+                $scope.selectedTagNames.push(tagName);
+            }
+            $scope.listVideo($scope.selectedTagNames);
+            availables();
         };
 
-        $scope.removeTag = function(tagName) {
-            $scope.selectedTags.splice($scope.selectedTags.indexOf(tagName), 1);
-            $scope.listVideo($scope.selectedTags);
+        $scope.isSelected = function(tag) {
+            return $scope.selectedTagNames.indexOf(tag._id) !== -1;
         };
 
     }

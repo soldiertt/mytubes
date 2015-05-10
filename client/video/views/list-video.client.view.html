@@ -1,12 +1,14 @@
-<form ng-submit="updateVideo()">
-<ul>
-    <li ng-repeat="video in videos" >{{video.ref}} ({{video.tags}})
-        <img src="static/img/edit.png" alt="Edit" ng-click="editVideo(video)" ng-show="!editMode" />
-        <span ng-show="editedVideo._id==video._id">
+<div class="videos">
+    <form ng-submit="updateVideo()">
+        <ul class="nav">
+            <li ng-repeat="video in videos">{{video.ref}} ({{video.tags}})
+                <img src="static/img/edit.png" alt="Edit" ng-click="editVideo(video)" ng-show="!editMode" />
+                <span ng-show="editedVideo._id==video._id">
            <input type="text" name="tags" id="tags" ng-model="editedVideo.tagsDisplay" />
-           <input type="submit" value="ok" />
+           <input type="submit" value="ok" class="btn btn-xs btn-primary" />
         </span>
-        <img src="static/img/delete.png" alt="Delete" ng-click="deleteVideo(video)" ng-show="!editMode" />
-    </li>
-</ul>
-</form>
+                <img src="static/img/delete.png" alt="Delete" ng-click="deleteVideo(video)" ng-show="!editMode" />
+            </li>
+        </ul>
+    </form>
+</div>

@@ -56,8 +56,16 @@ exports.list = function (req, res) {
 };
 
 exports.listUniqTags = function (req, res) {
+    var queryObj = {user: req.user._id},
+        tagsArray = req.query.tags;
+    if (req.query.tags) {
+        if( typeof tagsArray === 'string' ) {
+            tagsArray = [ tagsArray ];
+        }
+        queryObj.tags = {$all : tagsArray};
+    }
     Video.aggregate([
-            { "$match": { "user": req.user._id }},
+            { "$match": queryObj},
             { "$project": { "tags":1 }},
             { "$unwind": "$tags" },
             { "$group": { "_id": "$tags", "count": { "$sum": 1 } }},

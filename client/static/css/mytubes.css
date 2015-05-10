@@ -1,0 +1,51 @@
+body {
+  background-color: #ebf3fc;
+}
+h1,
+h2,
+h3 {
+  margin: 5px;
+}
+nav {
+  float: left;
+  border-right: 1px solid #ccc;
+  width: 170px;
+  padding-right: 5px;
+}
+nav li.disabled a {
+  font-style: italic;
+}
+nav li a {
+  padding: 5px 10px !important;
+}
+nav li .glyphicon {
+  display: none;
+}
+nav li.active .glyphicon {
+  display: inherit;
+}
+.videos {
+  float: left;
+}
+.bottompanel {
+  margin-top: 10px;
+  clear: both;
+  padding: 0px;
+  border: 1px solid #6b99ff;
+  border-radius: 10px;
+}
+.bottompanel form {
+  padding: 10px 20px 10px 20px;
+}
+section h1 {
+  font-size: 1.4em;
+  margin: 0px;
+  padding: 5px 20px 5px 20px;
+  background-color: #79bfcc;
+  color: #eee;
+  border-radius: 10px 10px 0px 0px;
+  margin-bottom: 5px;
+}
+.glyphicon-remove-circle {
+  float: right;
+}

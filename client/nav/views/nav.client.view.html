@@ -1,10 +1,11 @@
-<section ng-controller="NavigationController">
-    <ul>
-       <li ng-repeat="tag in navtags" ng-click="addTag(tag._id)">{{tag._id}} - {{tag.count}}</li>
+<nav ng-controller="NavigationController">
+    <ul class="nav nav-pills nav-stacked">
+       <li ng-repeat="tag in navtags" ng-class="{active: isSelected(tag), disabled: tag.disabled}" ng-click="tag.disabled || toggleTag(tag._id)">
+           <a href="">
+                {{tag._id}}
+               <span class="badge">{{tag.count}}</span>
+               <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+           </a>
+       </li>
     </ul>
-
-    <ul>
-        <li ng-repeat="selTag in selectedTags" ng-click="removeTag(selTag)">{{selTag}}</li>
-    </ul>
-
-</section>
+</nav>
