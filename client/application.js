@@ -1,5 +1,5 @@
 var mainApplicationModuleName = 'mytubes';
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngRoute', 'ngResource', 'user', 'core', 'video']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngRoute', 'ngResource', 'user', 'core', 'video', 'ui.bootstrap', 'ngMessages']);
 
 mainApplicationModule.config(['$locationProvider', function ($locationProvider) {
     $locationProvider.hashPrefix('!');

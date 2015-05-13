@@ -1,13 +1,31 @@
 <section class="bottompanel">
-    <h1>Add a new video</h1>
-    <form ng-submit="save()">
-        <label for="video">Video :</label>
-        <input type="text" name="video" id="video" ng-model="newvideo.ref" />
-        <label for="tags">Tags :</label>
-        <input type="text" name="tags" id="tags" ng-model="newvideo.tags" />
-        <input type="submit" class="btn btn-sm btn-primary">
-        <div data-ng-show="error">
-            <strong data-ng-bind="error"></strong>
-        </div>
-    </form>
+   <h1>Add a new video</h1>
+   <form name="forms.createVideoForm" ng-submit="save()" class="form-inline" novalidate>
+      <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && forms.createVideoForm.video.$invalid}">
+         <span class="input-group-addon">
+            <span class="glyphicon glyphicon-info-sign" popover-title="Video help" popover-template="getTpl('popup-videohelp')" popover-trigger="mouseenter"></span>
+         </span>
+         <input type="text" class="form-control input-sm" placeholder="Video url or id" name="video" id="video" ng-model="newvideo.ref" size="40" ng-maxlength="50" ng-minlength="11" required />
+      </div>
+      <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && forms.createVideoForm.tags.$invalid}">
+         <span class="input-group-addon">
+            <span class="glyphicon glyphicon-info-sign" popover-title="Tags help" popover-template="getTpl('popup-tagshelp')" popover-trigger="mouseenter"></span>
+         </span>
+         <input type="text" class="form-control input-sm" placeholder="tag1 tag2 tag3" name="tags" id="tags" ng-model="newvideo.tags" size="35" ng-maxlength="100" ng-minlength="2" required tags-valid />
+      </div>
+      <input type="submit" class="btn btn-sm btn-primary" value="Add">
+      <div ng-show="forms.createVideoForm.$submitted" class="form-errors">
+         <ul>
+         <div ng-show="forms.createVideoForm.video.$invalid">
+            <li>Video : <span ng-messages="forms.createVideoForm.video.$error" ng-messages-include="video/views/create-video-errors.html"></span></li>
+         </div>
+         <div ng-show="forms.createVideoForm.tags.$invalid">
+            <li>Tags : <span ng-messages="forms.createVideoForm.tags.$error" ng-messages-include="video/views/create-video-errors.html"></span></li>
+         </div>
+         </ul>
+      </div>
+      <div data-ng-show="error">
+         <strong data-ng-bind="error"></strong>
+      </div>
+   </form>
 </section>

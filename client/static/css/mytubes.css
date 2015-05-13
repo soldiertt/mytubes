@@ -49,3 +49,17 @@ section h1 {
 .glyphicon-remove-circle {
   float: right;
 }
+.popover {
+  font-size: 0.8em;
+}
+.popover ul {
+  margin: 0px;
+  list-style-type: square;
+  padding-left: 10px;
+}
+.form-errors {
+  margin-top: 20px;
+  color: #A94442;
+  font-weight: bold;
+  font-size: 0.8em;
+}

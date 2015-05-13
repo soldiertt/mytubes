@@ -10,20 +10,28 @@ angular.module('video').controller('VideoController', ['$scope', '$location',  '
         };
 
         $scope.authentication = Authentication;
+        $scope.forms = {};
         $scope.newvideo = {};
+        $scope.getTpl = function(tplName) {
+           return "static/templates/" + tplName + ".html";
+        };
         $scope.save = function() {
-            var tags = splitTags($scope.newvideo.tags);
-            var video = new VideoResource({
-                ref: $scope.newvideo.ref,
-                tags: tags
-            });
-            video.$save(function (response) {
-                $scope.$broadcast('refreshNav');
-                $scope.error = undefined;
-                $scope.setInfo("Video successfully added !");
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
+
+           if ($scope.forms.createVideoForm.$valid) {
+
+               var tags = splitTags($scope.newvideo.tags);
+               var video = new VideoResource({
+                   ref: $scope.newvideo.ref,
+                   tags: tags
+               });
+               video.$save(function (response) {
+                   $scope.$broadcast('refreshNav');
+                   $scope.error = undefined;
+                   $scope.setInfo("Video successfully added !");
+               }, function (errorResponse) {
+                   $scope.error = errorResponse.data.message;
+               });
+           }
         };
 
         $scope.editVideo = function (video) {
