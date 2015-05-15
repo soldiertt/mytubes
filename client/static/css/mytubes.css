@@ -6,11 +6,17 @@ h2,
 h3 {
   margin: 5px;
 }
+/********************************
+************* NAVIGATION **********
+**********************************/
 nav {
   float: left;
-  border-right: 1px solid #ccc;
   width: 170px;
   padding-right: 5px;
+  font-size: 12px;
+}
+nav .badge {
+  font-size: 10px;
 }
 nav li.disabled a {
   font-style: italic;
@@ -24,42 +30,36 @@ nav li .glyphicon {
 nav li.active .glyphicon {
   display: inherit;
 }
+/********************************
+************* VIDEOS **********
+**********************************/
 .videos {
+  border-left: 1px solid #ccc;
   float: left;
-}
-.bottompanel {
-  margin-top: 10px;
-  clear: both;
-  padding: 0px;
-  border: 1px solid #6b99ff;
-  border-radius: 10px;
-}
-.bottompanel form {
-  padding: 10px 20px 10px 20px;
-}
-section h1 {
-  font-size: 1.4em;
-  margin: 0px;
-  padding: 5px 20px 5px 20px;
-  background-color: #79bfcc;
-  color: #eee;
-  border-radius: 10px 10px 0px 0px;
-  margin-bottom: 5px;
-}
-.glyphicon-remove-circle {
-  float: right;
-}
-.popover {
-  font-size: 0.8em;
-}
-.popover ul {
-  margin: 0px;
-  list-style-type: square;
+  max-width: 950px;
   padding-left: 10px;
 }
-.form-errors {
-  margin-top: 20px;
-  color: #A94442;
-  font-weight: bold;
-  font-size: 0.8em;
+.video-list > li {
+  display: block;
+  float: left;
+  margin: 5px;
+  height: 230px;
+}
+.tagslist {
+  padding: 3px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+}
+.tagslist li {
+  font-size: 12px;
+  padding: 1px 7px 1px 7px;
+  margin: 1px;
+  background-color: #428BCA;
+  border-radius: 3px;
+  border: 1px solid #357ebd;
+  color: #fff;
+}
+.input-group {
+  margin-top: 5px;
+  width: 100%;
 }

@@ -22,5 +22,5 @@ gulp.task('serve', function () {
     var server = gls('server.js', {env: {LRMODE: 'true'}});
     server.start();
 
-    gulp.watch(['client/static/css/*.css', 'client/**/views/*.html', 'client/static/**/*', 'client/**/*.js'], server.notify);
+    gulp.watch(['client/**/views/*.html', 'client/static/**/*', 'client/**/*.js'], server.notify);
 });

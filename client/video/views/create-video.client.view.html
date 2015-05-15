@@ -1,31 +1,38 @@
-<section class="bottompanel">
-   <h1>Add a new video</h1>
-   <form name="forms.createVideoForm" ng-submit="save()" class="form-inline" novalidate>
+<section class="panel">
+   <form name="forms.createVideoForm" ng-submit="save()" novalidate>
       <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && forms.createVideoForm.video.$invalid}">
          <span class="input-group-addon">
             <span class="glyphicon glyphicon-info-sign" popover-title="Video help" popover-template="getTpl('popup-videohelp')" popover-trigger="mouseenter"></span>
          </span>
-         <input type="text" class="form-control input-sm" placeholder="Video url or id" name="video" id="video" ng-model="newvideo.ref" size="40" ng-maxlength="50" ng-minlength="11" required />
+         <input type="text" class="form-control input-sm" placeholder="Video url or id" name="video" id="video" ng-model="newvideo.ref" size="40" ng-maxlength="70" ng-minlength="11" required youtube-vid />
       </div>
-      <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && forms.createVideoForm.tags.$invalid}">
+      <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && containsTagsError(forms.createVideoForm.$error)}">
          <span class="input-group-addon">
             <span class="glyphicon glyphicon-info-sign" popover-title="Tags help" popover-template="getTpl('popup-tagshelp')" popover-trigger="mouseenter"></span>
          </span>
-         <input type="text" class="form-control input-sm" placeholder="tag1 tag2 tag3" name="tags" id="tags" ng-model="newvideo.tags" size="35" ng-maxlength="100" ng-minlength="2" required tags-valid />
+         <!--<input type="text" class="form-control input-sm" placeholder="tag1 tag2 tag3" name="tags" id="tags" ng-model="newvideo.tags" size="35" ng-maxlength="100" ng-minlength="2" required tags-valid />-->
+         <tags-input ng-model="newvideo.tags" min-length="2" max-length="25" min-tags="1" max-tags="10" add-on-space="true" replace-spaces-with-dashes="false" class="ti-input-sm" ng-class="{'custom-tags': !forms.createVideoForm.$submitted && !hasFocus}">
+            <auto-complete source="loadTags()" ></auto-complete>
+         </tags-input>
       </div>
-      <input type="submit" class="btn btn-sm btn-primary" value="Add">
-      <div ng-show="forms.createVideoForm.$submitted" class="form-errors">
+
+      <div ng-show="forms.createVideoForm.$submitted && forms.createVideoForm.$invalid" class="form-errors">
          <ul>
-         <div ng-show="forms.createVideoForm.video.$invalid">
-            <li>Video : <span ng-messages="forms.createVideoForm.video.$error" ng-messages-include="video/views/create-video-errors.html"></span></li>
-         </div>
-         <div ng-show="forms.createVideoForm.tags.$invalid">
-            <li>Tags : <span ng-messages="forms.createVideoForm.tags.$error" ng-messages-include="video/views/create-video-errors.html"></span></li>
-         </div>
+            <li ng-show="forms.createVideoForm.video.$invalid">Video :
+               <span ng-messages="forms.createVideoForm.video.$error" ng-messages-include="video/views/create-video-errors.html"></span>
+            </li>
+            <li ng-show="containsTagsError(forms.createVideoForm.$error)">Tags :
+               <span ng-messages="filterTagsError(forms.createVideoForm.$error)" ng-messages-include="video/views/create-video-errors.html"></span>
+            </li>
          </ul>
       </div>
       <div data-ng-show="error">
          <strong data-ng-bind="error"></strong>
       </div>
+
+      <div class="actions">
+         <input type="submit" class="btn btn-sm btn-primary" value="Add new video">
+      </div>
    </form>
+
 </section>

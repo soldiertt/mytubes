@@ -28,10 +28,14 @@ var VideoSchema = new Schema({
         validate: [function(tags){
             return (tags.length !== 0);
         }, 'Please add at least one tag.']
+    },
+    created: {
+        type: Date,
+        default: Date.now
     }
 });
 
-VideoSchema.pre('save', preSave);
+//VideoSchema.pre('save', preSave);
 
 VideoSchema.set('toJSON', {
     getters: true,

@@ -41,9 +41,57 @@ angular.module('video').directive('tagsValid', function () {
                ctrl.$setValidity('tagsLengthValidator', false);
             }
 
+            return allTags;
+         }
+
+         // we need to add our customValidator function to an array of other(build-in or custom) functions
+         // I have not notice any performance issues, but it would be worth investigating how much
+         // effect does this have on the performance of the app
+         ctrl.$parsers.push(customValidator);
+
+         function customFormatter(ngModelValue) {
+            if (ngModelValue) {
+               return ngModelValue.join(" ");
+            } else {
+               return ngModelValue;
+            }
+         }
+          ctrl.$formatters.push(customFormatter);
+      }
+   };
+});
+
+angular.module('video').directive('youtubeVid', function () {
+   return {
+
+      // limit usage to argument only
+      restrict: 'A',
+
+      // require NgModelController, i.e. require a controller of ngModel directive
+      require: 'ngModel',
+
+      // create linking function and pass in our NgModelController as a 4th argument
+      link: function (scope, element, attr, ctrl) {
+         // please note you can name your function & argument anything you like
+         function customValidator(ngModelValue) {
+
+            ctrl.$setValidity('youtubeVideoId', false);
+
+            var videoId = ngModelValue.trim();
+
+            if (videoId.length === 11) {
+               // it's ok, it's video id
+               ctrl.$setValidity('youtubeVideoId', true);
+            } else {
+               videoId = videoId.substr(videoId.lastIndexOf("v=") + 2, 11);
+               if (videoId.length === 11) {
+                  // it's ok, it's video id
+                  ctrl.$setValidity('youtubeVideoId', true);
+               }
+            }
 
             // we need to return our ngModelValue, to be displayed to the user(value of the input)
-            return ngModelValue;
+            return videoId;
          }
 
          // we need to add our customValidator function to an array of other(build-in or custom) functions

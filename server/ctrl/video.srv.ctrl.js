@@ -40,11 +40,14 @@ exports.create = function (req, res) {
 };
 
 exports.list = function (req, res) {
-    var queryObj = {user: req.user._id};
+    var queryObj = {user: req.user._id},
+        maxItems = 15;
+
     if (req.query.tags) {
         queryObj.tags = {$all : req.query.tags};
+        maxItems = 0;
     }
-    Video.find(queryObj).populate('user', 'firstName lastName fullName ').exec(function (err, videos) {
+    Video.find(queryObj).sort({created: -1}).limit(maxItems).exec(function (err, videos) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
