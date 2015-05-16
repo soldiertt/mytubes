@@ -1,16 +1,21 @@
-angular.module('video').controller('VideoController', ['$scope', '$location',  '$sce', 'Authentication', 'NavigationResource', 'VideoResource',
-    function ($scope, $location, $sce, Authentication, NavigationResource, VideoResource) {
+angular.module('video').controller('VideoController', ['$scope', '$location',  '$sce', '$modal', 'Authentication', 'NavigationResource', 'VideoResource', 'YoutubeResource', 'ModalHelper',
+    function ($scope, $location, $sce, $modal, Authentication, NavigationResource, VideoResource, YoutubeResource, ModalHelper) {
 
         $scope.authentication = Authentication;
         $scope.forms = {};
+        $scope.navtags = [];
         $scope.newvideo = {};
         $scope.editedVideo = {};
         $scope.getTpl = function(tplName) {
            return "static/templates/" + tplName + ".html";
         };
 
-        $scope.loadTags = function() {
-           return NavigationResource.query();
+        $scope.setNavtags = function(tags) {
+           $scope.navtags = tags;
+        };
+
+        $scope.autocompleteTags = function($query) {
+           return $scope.navtags.filter(function(elem){ return elem._id.indexOf($query) === 0; }).map(function(elem) { return elem._id; });
         };
 
         $scope.save = function() {
@@ -23,13 +28,20 @@ angular.module('video').controller('VideoController', ['$scope', '$location',  '
                video.$save(function (response) {
                    $scope.$broadcast('refreshNav');
                    $scope.error = undefined;
-                   $scope.newvideo = {};
+                   $scope.newvideo.ref = "";
+                   $scope.newvideo.tags = [];
                    $scope.forms.createVideoForm.$setPristine();
                    $scope.setInfo("Video successfully added !");
                }, function (errorResponse) {
                    $scope.error = errorResponse.data.message;
                });
            }
+        };
+
+        $scope.resetCreateForm = function() {
+           $scope.newvideo.ref = "";
+           $scope.newvideo.tags = [];
+           $scope.forms.createVideoForm.$setPristine();
         };
 
        $scope.listVideo = function(tagList) {
@@ -79,15 +91,25 @@ angular.module('video').controller('VideoController', ['$scope', '$location',  '
         };
 
         $scope.deleteVideo = function(video) {
-            video.$remove(function () {
-                var i;
-                for (i in $scope.videos) {
-                    if ($scope.videos[i] === video) {
-                        $scope.videos.splice(i, 1);
-                    }
-                }
-                $scope.setInfo("Video successfully removed !");
-                $scope.$broadcast('refreshNav');
+
+            var deleteCallback = function() {
+               video.$remove(function () {
+                   var i;
+                   for (i in $scope.videos) {
+                       if ($scope.videos[i] === video) {
+                           $scope.videos.splice(i, 1);
+                       }
+                   }
+                   $scope.setInfo("Video successfully removed !");
+                   $scope.$broadcast('refreshNav');
+               });
+            };
+            YoutubeResource.get({videoId: video.ref}, function(data) {
+               var vidTitle = "[UNKNOWN]";
+               if (data.items[0]) {
+                  vidTitle = data.items[0].snippet.title;
+               }
+               ModalHelper.open("deleteConfirm", deleteCallback, vidTitle);
             });
         };
 

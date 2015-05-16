@@ -26,7 +26,7 @@ angular.module('video').controller('NavigationController', ['$scope', '$location
 
             },
             loadNav = function() {
-                $scope.navtags = NavigationResource.query();
+                $scope.setNavtags(NavigationResource.query());
                 availables();
             };
 

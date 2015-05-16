@@ -1,4 +1,8 @@
 <div class="container">
-<div ng-show="info" class="bodyinfo">{{info}}</div>
-<ng-include src="'video/views/main-video.client.view.html'"></ng-include>
+   <div class="notification">
+      <div class="alert alert-success animate-show" ng-show="info">
+        {{info}}
+      </div>
+   </div>
+   <ng-include src="'video/views/main-video.client.view.html'"></ng-include>
 </div>

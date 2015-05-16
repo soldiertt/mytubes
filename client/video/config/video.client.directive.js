@@ -61,6 +61,11 @@ angular.module('video').directive('tagsValid', function () {
    };
 });
 
+
+// Validate YouTube input
+// OK : https://youtu.be/bdnA1fYFwNY
+// OK : https://www.youtube.com/watch?v=bdnA1fYFwNY
+// OK : bdnA1fYFwNY
 angular.module('video').directive('youtubeVid', function () {
    return {
 
@@ -74,22 +79,33 @@ angular.module('video').directive('youtubeVid', function () {
       link: function (scope, element, attr, ctrl) {
          // please note you can name your function & argument anything you like
          function customValidator(ngModelValue) {
+            var videoId = ngModelValue.trim(),
+                paramIndex;
 
             ctrl.$setValidity('youtubeVideoId', false);
 
-            var videoId = ngModelValue.trim();
-
             if (videoId.length === 11) {
-               // it's ok, it's video id
+               // OK : bdnA1fYFwNY
                ctrl.$setValidity('youtubeVideoId', true);
             } else {
-               videoId = videoId.substr(videoId.lastIndexOf("v=") + 2, 11);
-               if (videoId.length === 11) {
-                  // it's ok, it's video id
-                  ctrl.$setValidity('youtubeVideoId', true);
+               paramIndex = videoId.lastIndexOf("watch?v=");
+               if (paramIndex > -1) {
+                  videoId = videoId.substr(paramIndex + 8, 11);
+                  if (videoId.length === 11) {
+                     // OK : https://www.youtube.com/watch?v=bdnA1fYFwNY
+                     ctrl.$setValidity('youtubeVideoId', true);
+                  }
+               } else {
+                  paramIndex = videoId.lastIndexOf("youtu.be");
+                  if (paramIndex > -1) {
+                     videoId = videoId.substr(paramIndex + 9, 11);
+                     if (videoId.length === 11) {
+                        // OK : https://youtu.be/bdnA1fYFwNY
+                        ctrl.$setValidity('youtubeVideoId', true);
+                     }
+                  }
                }
             }
-
             // we need to return our ngModelValue, to be displayed to the user(value of the input)
             return videoId;
          }

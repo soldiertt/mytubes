@@ -6,32 +6,24 @@
          </span>
          <input type="text" class="form-control input-sm" placeholder="Video url or id" name="video" id="video" ng-model="newvideo.ref" size="40" ng-maxlength="70" ng-minlength="11" required youtube-vid />
       </div>
+      <span ng-show="forms.createVideoForm.$submitted && forms.createVideoForm.video.$invalid" ng-messages="forms.createVideoForm.video.$error" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
       <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && containsTagsError(forms.createVideoForm.$error)}">
          <span class="input-group-addon">
             <span class="glyphicon glyphicon-info-sign" popover-title="Tags help" popover-template="getTpl('popup-tagshelp')" popover-trigger="mouseenter"></span>
          </span>
-         <!--<input type="text" class="form-control input-sm" placeholder="tag1 tag2 tag3" name="tags" id="tags" ng-model="newvideo.tags" size="35" ng-maxlength="100" ng-minlength="2" required tags-valid />-->
-         <tags-input ng-model="newvideo.tags" min-length="2" max-length="25" min-tags="1" max-tags="10" add-on-space="true" replace-spaces-with-dashes="false" class="ti-input-sm" ng-class="{'custom-tags': !forms.createVideoForm.$submitted && !hasFocus}">
-            <auto-complete source="loadTags()" ></auto-complete>
+         <tags-input ng-model="newvideo.tags" min-length="2" max-length="25" min-tags="1" max-tags="10" add-on-space="true" replace-spaces-with-dashes="false" class="ti-input-sm" ng-class="{'custom-tags': !forms.createVideoForm.$submitted && !hasFocus}" >
+            <auto-complete source="autocompleteTags($query)" min-length="2"></auto-complete>
          </tags-input>
       </div>
+      <span ng-show="forms.createVideoForm.$submitted && containsTagsError(forms.createVideoForm.$error)" ng-messages="filterTagsError(forms.createVideoForm.$error)" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
 
-      <div ng-show="forms.createVideoForm.$submitted && forms.createVideoForm.$invalid" class="form-errors">
-         <ul>
-            <li ng-show="forms.createVideoForm.video.$invalid">Video :
-               <span ng-messages="forms.createVideoForm.video.$error" ng-messages-include="video/views/create-video-errors.html"></span>
-            </li>
-            <li ng-show="containsTagsError(forms.createVideoForm.$error)">Tags :
-               <span ng-messages="filterTagsError(forms.createVideoForm.$error)" ng-messages-include="video/views/create-video-errors.html"></span>
-            </li>
-         </ul>
-      </div>
-      <div data-ng-show="error">
+      <div data-ng-show="error" class="form-errors">
          <strong data-ng-bind="error"></strong>
       </div>
 
       <div class="actions">
          <input type="submit" class="btn btn-sm btn-primary" value="Add new video">
+         <a href="" class="btn btn-sm btn-warning" ng-click="resetCreateForm()">Reset</a>
       </div>
    </form>
 

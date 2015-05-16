@@ -23,15 +23,11 @@
                   <ul class="nav nav-pills">
                      <li ng-repeat="tag in video.tags">{{tag}}</li>
                   </ul>
-               <!--<span class="input-group" ng-show="editedVideo._id!==video._id">
-                     <input type="text" class="form-control input-sm" name="tags" ng-model="video.tags" size="30" tags-valid disabled />
-               </span>-->
                </div>
-               <div class="input-group" ng-show="editedVideo._id===video._id" ng-class="{'has-error': forms.editVideoForm.$submitted && forms.editVideoForm['tempTags' + video._id].$invalid}">
-                  <!--<input type="text" class="form-control input-sm" name="tempTags{{video._id}}" ng-model="editedVideo.tempTags" size="30" ng-maxlength="100" ng-minlength="2" required tags-valid />-->
-
-                  <tags-input ng-model="editedVideo.tempTags" min-length="2" max-length="25" min-tags="1" max-tags="10" add-on-space="true" replace-spaces-with-dashes="false" class="ti-input-sm" ng-class="{'custom-tags': !forms.editVideoForm.$submitted && !hasFocus}">
-                     <auto-complete source="loadTags()" ></auto-complete>
+               <div class="input-group" ng-show="editedVideo._id===video._id">
+                  <tags-input ng-model="editedVideo.tempTags" min-length="2" max-length="25" min-tags="1"
+                    max-tags="10" add-on-space="true" replace-spaces-with-dashes="false" class="ti-input-sm">
+                     <auto-complete source="autocompleteTags($query)" min-length="2"></auto-complete>
                   </tags-input>
                </div>
             </div>
