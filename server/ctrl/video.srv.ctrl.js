@@ -40,6 +40,7 @@ exports.create = function (req, res) {
 };
 
 exports.list = function (req, res) {
+   console.log("userid : ",req.user._id);
     var queryObj = {user: req.user._id},
         maxItems = 15;
 

@@ -1,10 +1,11 @@
 <section class="panel">
+   <h1 class="top">Add video</h1>
    <form name="forms.createVideoForm" ng-submit="save()" novalidate>
       <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && forms.createVideoForm.video.$invalid}">
          <span class="input-group-addon">
             <span class="glyphicon glyphicon-info-sign" popover-title="Video help" popover-template="getTpl('popup-videohelp')" popover-trigger="mouseenter"></span>
          </span>
-         <input type="text" class="form-control input-sm" placeholder="Video url or id" name="video" id="video" ng-model="newvideo.ref" size="40" ng-maxlength="70" ng-minlength="11" required youtube-vid />
+         <input type="text" class="form-control input-sm" placeholder="Video url or id" name="video" id="video" ng-model="newvideo.ref" size="40" ng-maxlength="100" ng-minlength="11" required youtube-vid maxlength="100" />
       </div>
       <span ng-show="forms.createVideoForm.$submitted && forms.createVideoForm.video.$invalid" ng-messages="forms.createVideoForm.video.$error" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
       <div class="input-group" ng-class="{'has-error': forms.createVideoForm.$submitted && containsTagsError(forms.createVideoForm.$error)}">
@@ -22,7 +23,7 @@
       </div>
 
       <div class="actions">
-         <input type="submit" class="btn btn-sm btn-primary" value="Add new video">
+         <input type="submit" class="btn btn-sm btn-primary" value="Submit">
          <a href="" class="btn btn-sm btn-warning" ng-click="resetCreateForm()">Reset</a>
       </div>
    </form>

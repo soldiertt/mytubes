@@ -3,10 +3,10 @@ var userCtrl = require('../ctrl/user.srv.ctrl'),
 
 module.exports = function (app) {
     app.route('/api/video')
-        .get(videoCtrl.list)
+        .get(userCtrl.requiresLogin, videoCtrl.list)
         .post(userCtrl.requiresLogin, videoCtrl.create);
     app.route('/api/tags')
-        .get(videoCtrl.listUniqTags);
+        .get(userCtrl.requiresLogin, videoCtrl.listUniqTags);
     app.route('/api/video/:videoId')
         .get(videoCtrl.read)
         .put(userCtrl.requiresLogin, videoCtrl.hasAuthorization, videoCtrl.update)

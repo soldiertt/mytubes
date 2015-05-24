@@ -1,16 +1,5 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    preSave = function(next) {
-        var tags = this.tags;
-        // Remove empty strings
-        tags = tags.filter(Boolean);
-        // Remove duplicates
-        tags = tags.filter(function(item, pos) {
-            return tags.indexOf(item) === pos;
-        });
-        this.tags = tags;
-        next();
-    };
+    Schema = mongoose.Schema;
 
 var VideoSchema = new Schema({
     ref: {
@@ -35,7 +24,6 @@ var VideoSchema = new Schema({
     }
 });
 
-//VideoSchema.pre('save', preSave);
 
 VideoSchema.set('toJSON', {
     getters: true,

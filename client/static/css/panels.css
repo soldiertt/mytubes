@@ -1,8 +1,7 @@
 .panel {
-  margin-top: 10px;
   clear: both;
   padding: 0px;
-  border: 1px solid #6b99ff;
+  border: 1px solid #6666aa;
   border-radius: 10px;
 }
 .panel form {
@@ -15,14 +14,16 @@ section > h1.top {
   font-size: 1.4em;
   margin: 0px;
   padding: 5px 20px 5px 20px;
+  background-color: #357ebd;
   color: #eee;
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 8px 8px 0px 0px;
   margin-bottom: 5px;
 }
 section > h1.bottom {
   font-size: 1.4em;
   margin: 0px;
   padding: 5px 20px 5px 20px;
+  background-color: #357ebd;
   color: #eee;
   border-radius: 0px 0px 10px 10px;
   margin-top: 5px;

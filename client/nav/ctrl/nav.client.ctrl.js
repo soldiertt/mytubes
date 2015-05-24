@@ -1,33 +1,12 @@
-angular.module('video').controller('NavigationController', ['$scope', '$location', 'NavigationResource',
-    function ($scope, $location, NavigationResource) {
+angular.module('video').controller('NavigationController', ['$scope', '$location', 'NavigationResource', 'NavTagsService',
+    function ($scope, $location, NavigationResource, NavTagsService) {
 
-        $scope.selectedTagNames = [];
-        $scope.availableTags = [];
-
-        var availables = function() {
-                $scope.availableTags = NavigationResource.query({"tags":$scope.selectedTagNames}, function(availableTags) {
-                    $scope.navtags.forEach(function(navtag, i, navtags) {
-                        var j,
-                            available = false;
-                        for (j = 0; j < availableTags.length; j++) {
-                            if (navtag._id === availableTags[j]._id) {
-                                available = true;
-                                break;
-                            }
-                        }
-                        navtags[i].disabled = !available;
-                        if (available) {
-                            navtags[i].count = availableTags[j].count;
-                        } else {
-                            navtags[i].count = undefined;
-                        }
-                    });
-                });
-
-            },
-            loadNav = function() {
-                $scope.setNavtags(NavigationResource.query());
-                availables();
+        var loadNav = function() {
+                NavTagsService.setNavtags(NavigationResource.query());
+                $scope.setNavtags(NavTagsService.getNavtags()); //Store in parent controller
+                NavigationResource.query({"tags":NavTagsService.getSelectedTagNames()}, function(availables){
+                  NavTagsService.setAvailableTags(availables);
+               });
             };
 
         loadNav();
@@ -37,17 +16,19 @@ angular.module('video').controller('NavigationController', ['$scope', '$location
         });
 
         $scope.toggleTag = function(tagName) {
-            if ($scope.selectedTagNames.indexOf(tagName) !== -1) {
-                $scope.selectedTagNames.splice($scope.selectedTagNames.indexOf(tagName), 1);
+            if (NavTagsService.getSelectedTagNames().indexOf(tagName) !== -1) {
+               NavTagsService.removeSelectedTagName(tagName);
             } else {
-                $scope.selectedTagNames.push(tagName);
+               NavTagsService.addSelectedTagName(tagName);
             }
-            $scope.listVideo($scope.selectedTagNames);
-            availables();
+            $scope.listVideo(NavTagsService.getSelectedTagNames());
+            NavigationResource.query({"tags":NavTagsService.getSelectedTagNames()}, function(availables){
+               NavTagsService.setAvailableTags(availables);
+            });
         };
 
         $scope.isSelected = function(tag) {
-            return $scope.selectedTagNames.indexOf(tag._id) !== -1;
+            return NavTagsService.getSelectedTagNames().indexOf(tag._id) !== -1;
         };
 
     }

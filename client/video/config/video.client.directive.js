@@ -1,4 +1,4 @@
-angular.module('video').directive('tagsValid', function () {
+/*angular.module('video').directive('tagsValid', function () {
    return {
 
       // limit usage to argument only
@@ -60,7 +60,7 @@ angular.module('video').directive('tagsValid', function () {
       }
    };
 });
-
+*/
 
 // Validate YouTube input
 // OK : https://youtu.be/bdnA1fYFwNY
@@ -88,9 +88,9 @@ angular.module('video').directive('youtubeVid', function () {
                // OK : bdnA1fYFwNY
                ctrl.$setValidity('youtubeVideoId', true);
             } else {
-               paramIndex = videoId.lastIndexOf("watch?v=");
+               paramIndex = videoId.lastIndexOf("v=");
                if (paramIndex > -1) {
-                  videoId = videoId.substr(paramIndex + 8, 11);
+                  videoId = videoId.substr(paramIndex + 2, 11);
                   if (videoId.length === 11) {
                      // OK : https://www.youtube.com/watch?v=bdnA1fYFwNY
                      ctrl.$setValidity('youtubeVideoId', true);

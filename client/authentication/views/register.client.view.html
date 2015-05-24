@@ -1,0 +1,67 @@
+<div ng-controller="AuthenticationController" class="container">
+
+   <header>
+      <h1>MyTubes</h1>
+      <h2>Registration form</h2>
+   </header>
+   <form name="forms.registerForm" ng-submit="register()" class="form-horizontal" novalidate>
+       <fieldset>
+        <div class="form-group" ng-class="{'has-error': forms.registerForm.$submitted && forms.registerForm.firstName.$invalid}">
+            <label class="col-sm-2 control-label">Firstname</label>
+            <div class="col-sm-10">
+            <input type="text" name="firstName" ng-model="userData.firstName" class="form-control input-sm" placeholder="Firstname"
+               required ng-minlength="2" ng-maxlength="50" maxlength="50"/>
+            <span ng-show="forms.registerForm.$submitted && forms.registerForm.firstName.$invalid"
+               ng-messages="forms.registerForm.firstName.$error" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
+           </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': forms.registerForm.$submitted && forms.registerForm.lastName.$invalid}">
+            <label class="col-sm-2 control-label">Lastname</label>
+            <div class="col-sm-10">
+            <input type="text" name="lastName" ng-model="userData.lastName" class="form-control input-sm" placeholder="Lastname"
+               required ng-minlength="2" ng-maxlength="50" maxlength="50" />
+            <span ng-show="forms.registerForm.$submitted && forms.registerForm.lastName.$invalid"
+               ng-messages="forms.registerForm.lastName.$error" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
+           </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': forms.registerForm.$submitted && forms.registerForm.email.$invalid}">
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+            <input type="email" name="email" ng-model="userData.email" class="form-control input-sm" placeholder="Enter email"
+               required ng-minlength="5" ng-maxlength="60" maxlength="60" />
+            <span ng-show="forms.registerForm.$submitted && forms.registerForm.email.$invalid"
+               ng-messages="forms.registerForm.email.$error" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
+           </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': forms.registerForm.$submitted && forms.registerForm.username.$invalid}">
+            <label class="col-sm-2 control-label">Username</label>
+            <div class="col-sm-10">
+            <input type="text" name="username" ng-model="userData.username" class="form-control input-sm" placeholder="Username"
+               required ng-minlength="3" ng-maxlength="30" maxlength="30" />
+            <span ng-show="forms.registerForm.$submitted && forms.registerForm.username.$invalid"
+               ng-messages="forms.registerForm.username.$error" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
+           </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error': forms.registerForm.$submitted && forms.registerForm.password.$invalid}">
+            <label class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+            <input type="password" name="password" ng-model="userData.password" class="form-control input-sm" placeholder="Password"
+               required ng-minlength="7" ng-maxlength="50" maxlength="50" />
+            <span ng-show="forms.registerForm.$submitted && forms.registerForm.password.$invalid"
+               ng-messages="forms.registerForm.password.$error" ng-messages-include="video/views/create-video-errors.html" class="form-errors"></span>
+           </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Sign up</button>
+          </div>
+        </div>
+        <div class="form-group" ng-show="error">
+          <div class="col-sm-offset-2 col-sm-10 alert alert-danger">
+            {{error}}
+          </div>
+        </div>
+      </fieldset>
+    </form>
+</div>

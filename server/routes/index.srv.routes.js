@@ -1,4 +1,5 @@
+var indexCtrl = require('../ctrl/index.srv.ctrl');
+
 module.exports = function(app) {
-    var index = require('../ctrl/index.srv.ctrl');
-    app.get('/', index.render);
+    app.get('/', indexCtrl.render);
 };

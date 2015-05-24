@@ -1,13 +1,4 @@
 <section ng-controller="CoreController">
-    <div data-ng-show="!authentication.user">
-        <header class="navbar navbar-fixed-top">
-            <a href="/signup">Signup</a>
-            <a href="/signin">Signin</a>
-        </header>
-    </div>
-
-    <div data-ng-show="authentication.user">
-        <div ng-include src="'core/views/header.client.view.html'"></div>
-        <div ng-include src="'core/views/body.client.view.html'"></div>
-    </div>
+  <div ng-include src="'core/views/header.client.view.html'"></div>
+  <div ng-include src="'core/views/body.client.view.html'"></div>
 </section>

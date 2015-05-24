@@ -1,6 +1,8 @@
 <!doctype html>
 <html xmlns:ng="http://angularjs.org">
 <head>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>
         <%=title %>
     </title>
@@ -8,21 +10,22 @@
     <link href="/lib/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/lib/ng-tags-input/ng-tags-input.min.css" rel="stylesheet">
     <link href="/lib/ng-tags-input/ng-tags-input.bootstrap.min.css" rel="stylesheet">
+    <link href="/lib/fancybox/source/jquery.fancybox.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/mytubes.css" />
     <link rel="stylesheet" href="static/css/panels.css" />
 </head>
 
 <body>
 
+    <script type="text/javascript">window.user = <%- user || 'null' %>;</script>
+
     <section ng-view></section>
-    
-    <script type="text/javascript">
-        window.user = <%- user || 'null' %>;
-    </script>
 
     <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/fancybox/source/jquery.fancybox.pack.js"></script>
 
-    <script type="text/javascript" src="/lib/angular/angular.min.js"></script>
+    <!--<script type="text/javascript" src="/lib/angular/angular.min.js"></script>-->
+   <script type="text/javascript" src="/lib/angular/angular.js"></script>
     <script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="/lib/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="/lib/angular-messages/angular-messages.min.js"></script>
@@ -33,12 +36,15 @@
     <script src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
+    <script type="text/javascript" src="/authentication/auth.client.module.js"></script>
+    <script type="text/javascript" src="/authentication/service/auth.client.service.js"></script>
+    <script type="text/javascript" src="/authentication/ctrl/auth.client.ctrl.js"></script>
+    <script type="text/javascript" src="/authentication/config/auth.client.routes.js"></script>
+    <script type="text/javascript" src="/authentication/config/auth.client.interceptor.js"></script>
+
     <script type="text/javascript" src="/core/core.client.module.js"></script>
     <script type="text/javascript" src="/core/ctrl/core.client.ctrl.js"></script>
     <script type="text/javascript" src="/core/config/core.client.routes.js"></script>
-    
-    <script type="text/javascript" src="/user/user.client.module.js"></script>
-    <script type="text/javascript" src="/user/service/authentication.client.service.js"></script>
 
     <script type="text/javascript" src="/video/video.client.module.js"></script>
 
@@ -47,8 +53,8 @@
 
     <script type="text/javascript" src="/video/ctrl/video.client.ctrl.js"></script>
     <script type="text/javascript" src="/video/service/video.client.service.js"></script>
-    <script type="text/javascript" src="/video/config/video.client.routes.js"></script>
     <script type="text/javascript" src="/video/config/video.client.directive.js"></script>
+    <script type="text/javascript" src="/video/config/fancybox.client.directive.js"></script>
 
     <script type="text/javascript" src="/nav/ctrl/nav.client.ctrl.js"></script>
     <script type="text/javascript" src="/nav/services/nav.client.service.js"></script>

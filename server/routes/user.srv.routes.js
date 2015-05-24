@@ -2,15 +2,10 @@ var users = require('../ctrl/user.srv.ctrl'),
     passport = require('passport');
 
 module.exports = function (app) {
-    app.route('/signup')
-        .get(users.renderSignup)
-        .post(users.signup);
-    app.route('/signin')
-        .get(users.renderSignin)
-        .post(passport.authenticate('local', {
-            successRedirect: '/',
-            failureRedirect: '/signin',
-            failureFlash: true
-        }));
-    app.get('/signout', users.signout);
+    app.post('/signup', users.signup);
+    app.post('/signin', passport.authenticate('local'), users.signin);
+    app.post('/signout', users.signout);
+    app.get('/loggedin', function(req, res) {
+      res.send(req.isAuthenticated() ? req.user : '0');
+    });
 };

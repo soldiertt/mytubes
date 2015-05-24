@@ -7,7 +7,6 @@ var config = require('./config'),
     methodOverride = require('method-override'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
-    flash = require('connect-flash'),
     passport = require('passport');
 
 module.exports = function (db) {
@@ -39,7 +38,6 @@ module.exports = function (db) {
     app.set('views', './server/views');
     app.set('view engine', config.viewEngine);
 
-    app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
 

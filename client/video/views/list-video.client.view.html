@@ -1,9 +1,14 @@
 <div class="videos">
-   <h1>{{mainTitle}}</h1>
+   <h1>{{mainTitle}}
+      <span ng-repeat="mainTag in mainTags" class="main-tag">{{mainTag}}
+         <span ng-controller="NavigationController" class="glyphicon glyphicon-remove" ng-click="toggleTag(mainTag)"></span>
+      </span>
+   </h1>
    <form name="forms.editVideoForm" novalidate>
       <ul class="nav video-list">
          <li ng-repeat="video in videos" class="thumbnail">
-            <iframe width="280" height="156" ng-src="{{video.trustedRef}}" frameborder="0" allowfullscreen></iframe>
+            <!--<iframe width="280" height="156" ng-src="{{video.trustedVideo}}" frameborder="0" allowfullscreen></iframe>-->
+            <img fancybox ng-click="openFancybox('static/templates/viewer.html')" ng-src="{{video.trustedImg}}" />
             <div class="actions">
               <button class="btn btn-info btn-xs" ng-click="deleteVideo(video)">
                 <span class="glyphicon glyphicon-trash"></span> Delete

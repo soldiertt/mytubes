@@ -1,3 +1,5 @@
+/***************************************************************
+*********** NOT USED ******************************************/
 angular.module('video').config(['$routeProvider',
 function ($routeProvider) {
     $routeProvider.

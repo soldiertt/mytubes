@@ -5,12 +5,13 @@ h1,
 h2,
 h3 {
   margin: 5px;
+  background-color: #357ebd;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 20px 5px 20px;
 }
 .navbar {
   margin-bottom: 5px;
-}
-.maincontent {
-  border-top: 1px solid #ccc;
 }
 /********************************
 ************* NAVIGATION **********
@@ -36,13 +37,27 @@ nav li .glyphicon {
 nav li.active .glyphicon {
   display: inherit;
 }
+.main-tag {
+  background-color: white;
+  color: #357ebd;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 3px 7px 3px 7px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+}
+.main-tag .glyphicon-remove {
+  cursor: pointer;
+}
 /********************************
 ************* VIDEOS **********
 **********************************/
 .videos {
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #6666aa;
   float: left;
   max-width: 950px;
+  width: 100%;
   padding-left: 10px;
 }
 .video-list > li {
@@ -50,6 +65,18 @@ nav li.active .glyphicon {
   float: left;
   margin: 5px;
   height: 230px;
+}
+.video-list > li > img {
+  height: 156px;
+  border: 0px;
+  cursor: pointer;
+}
+.video-list > li > img:hover {
+  opacity: 0.7;
+  transition: opacity 0.5s;
+}
+.actions {
+  margin-top: 4px;
 }
 .tagslist {
   padding: 3px;
