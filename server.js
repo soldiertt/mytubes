@@ -5,8 +5,10 @@ var mongoose = require('./server/config/mongoose'),
 
 var db = mongoose(),
     app = express(db),
-    passport = passport();
+    passport = passport(),
+    port = process.env.OPENSHIFT_NODEJS_PORT || 3000,
+    ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 
-app.listen(3000);
+app.listen(port, ipaddress);
 module.exports = app;
-console.log('Server running at http://localhost:3000/');
+console.log('Server running at http://' + ipaddress + ':' + port + '/');
