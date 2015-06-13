@@ -4,7 +4,8 @@
   "description": "Store and manage your personal youtube video collection.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,6 @@
     "ejs": "^2.3.1",
     "express": "^4.12.3",
     "express-session": "^1.11.1",
-    "http": "0.0.0",
     "method-override": "^2.3.2",
     "mongoose": "^4.0.2",
     "morgan": "^1.5.2",
